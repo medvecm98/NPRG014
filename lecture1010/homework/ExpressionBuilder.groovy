@@ -6,15 +6,94 @@
 // This means that parentheses must be placed where necessary with respect to the mathematical operator priorities.
 // Change or add to the code in the script. Reuse the infrastructure code at the bottom of the script.
 class NumericExpressionBuilder extends BuilderSupport {
-    
     @Override
     String toString() {
-//        ...
+        root.toString()
     }
+
+    protected Object checkRoot(Object toCheck) {
+        if (!root)
+            root = toCheck
+        return toCheck
+    }
+
+    protected void setParent(Object parent, Object child) {
+        parent.children << child
+    }
+
+    protected Object createNode(Object nodeName) {
+        return checkRoot(new Item(name: nodeName))
+    }
+
+    protected Object createNode(Object nodeName, Object value) {
+        null
+    }
+
+    protected Object createNode(Object nodeName, Map attrs) {
+        final node = new Item(name: nodeName)
+        if (attrs) {
+            node.attrs = attrs
+        }
+        return checkRoot(node)
+    }
+
+    protected Object createNode(Object nodeName, Map attrs, Object value) {
+        final node = new Item(name: nodeName)
+        if (attrs) {
+            node.attrs = attrs
+        }
+        return checkRoot(node)
+    }
+
+    Item root = null
 }
 
 class Item {
-//...
+    static Map priority = ['+' : 10, '-' : 10, '*' : 20, '/' : 20, 'power' : 30]
+    static Map symbols = ['+' : '+', '-' : '-', '*' : '*', '/' : '/', 'power' : '^']
+
+    String name
+    Map attrs
+    final List children = []
+
+    @Override
+    String toString() {
+        def expression = new StringBuilder()
+
+        if (children.size() > 0) {
+            expression << children[0].toPriorityString(priority[name]) << ' '
+            expression << symbols[name] << ' '
+            expression << children[1].toPriorityString(priority[name])
+        }
+        else {
+            return attrs['value']
+        }
+
+        return expression.toString()
+    }
+
+    String toPriorityString(int prevPriority) {
+        def expression = new StringBuilder()
+
+        if (priority[name] < prevPriority) {
+            expression << '('
+        }
+
+        if (children.size() > 0) {
+            expression << children[0].toPriorityString(priority[name]) << ' '
+            expression << symbols[name] << ' '
+            expression << children[1].toPriorityString(priority[name])
+        }
+        else {
+            return attrs['value']
+        }
+
+        if (priority[name] < prevPriority) {
+            expression << ')'
+        }
+
+        return expression.toString()
+    }
 }
 //------------------------- Do not modify beyond this point!
 
@@ -54,5 +133,5 @@ println xml.toString()
 
 //NumericExpressionBuilder displaying the expression
 def expression = build(new NumericExpressionBuilder(), description)
-println (expression.toString())
+println (expression)
 assert '10 + x * (2 - 3) / 8 ^ (9 - 5)' == expression.toString()
