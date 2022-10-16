@@ -22,19 +22,15 @@ class NumericExpressionBuilder extends BuilderSupport {
     }
 
     protected Object createNode(Object nodeName) {
-        return checkRoot(new Item(name: nodeName))
+        createNode nodeName, null, null
     }
 
     protected Object createNode(Object nodeName, Object value) {
-        null
+        createNode nodeName, null, value
     }
 
     protected Object createNode(Object nodeName, Map attrs) {
-        final node = new Item(name: nodeName)
-        if (attrs) {
-            node.attrs = attrs
-        }
-        return checkRoot(node)
+        createNode nodeName, attrs, null
     }
 
     protected Object createNode(Object nodeName, Map attrs, Object value) {
@@ -58,21 +54,10 @@ class Item {
 
     @Override
     String toString() {
-        def expression = new StringBuilder()
-
-        if (children.size() > 0) {
-            expression << children[0].toPriorityString(priority[name]) << ' '
-            expression << symbols[name] << ' '
-            expression << children[1].toPriorityString(priority[name])
-        }
-        else {
-            return attrs['value']
-        }
-
-        return expression.toString()
+        toStringPriority(Integer.MIN_VALUE)
     }
 
-    String toPriorityString(int prevPriority) {
+    String toStringPriority(int prevPriority) {
         def expression = new StringBuilder()
 
         if (priority[name] < prevPriority) {
@@ -80,9 +65,9 @@ class Item {
         }
 
         if (children.size() > 0) {
-            expression << children[0].toPriorityString(priority[name]) << ' '
+            expression << children[0].toStringPriority(priority[name]) << ' '
             expression << symbols[name] << ' '
-            expression << children[1].toPriorityString(priority[name])
+            expression << children[1].toStringPriority(priority[name])
         }
         else {
             return attrs['value']
@@ -95,6 +80,11 @@ class Item {
         return expression.toString()
     }
 }
+
+
+
+
+
 //------------------------- Do not modify beyond this point!
 
 def build(builder, String specification) {
@@ -133,5 +123,5 @@ println xml.toString()
 
 //NumericExpressionBuilder displaying the expression
 def expression = build(new NumericExpressionBuilder(), description)
-println (expression)
+println (expression.toString())
 assert '10 + x * (2 - 3) / 8 ^ (9 - 5)' == expression.toString()
