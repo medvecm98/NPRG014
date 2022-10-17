@@ -10,11 +10,13 @@ interface Calculator {
     def increment(a)
 }
 
+def incCode = {add(it, 1)}
 final myCalculator = [
         add: {a, b -> a + b},
         multiply: {a, b -> a * b},
-        increment: {it + 1}
+        increment: incCode
 ] as Calculator
+incCode.delegate = myCalculator
 
 assert 10 == myCalculator.add(3, 7)
 assert 6 == myCalculator.multiply(2, 3)

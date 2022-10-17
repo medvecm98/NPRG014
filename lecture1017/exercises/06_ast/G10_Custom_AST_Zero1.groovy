@@ -30,6 +30,10 @@ public @interface Zero1 {}
 public class ZeroTransformation1 implements ASTTransformation {
 
     public void visit(ASTNode[] astNodes, SourceUnit source) {
+        ClassNode annotatedClass = astNodes[1]
+        
+        ASTNode stmt = returnS(constX(0))
+        annotatedClass.....
     }
 }
 

@@ -7,7 +7,9 @@ class MyIndentingBuilder {
         if (args.size() > 0) {
             Closure closure = args[0]
             closure.delegate = this
-            result = closure()
+            indent += 3
+            result = closure() //this calls apparentely
+            indent -= 3
         }
         return "<$methodName>\n${' ' * indent}$result\n${' ' * (indent - 1)}</$methodName>"
     }

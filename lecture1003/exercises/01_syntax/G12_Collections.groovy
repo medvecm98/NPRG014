@@ -7,10 +7,11 @@ assert 5050 == (1..100).inject(0) {int acc, int v -> acc + v}
 assert 5050 == (1..100).sum()
 
 //TASK make all words uppercase
-//assert ['GROOVY', 'JAVA', 'SCALA', 'KOTLIN'] == ['Groovy', 'Java', 'scala', 'kotlin']...
+assert ['GROOVY', 'JAVA', 'SCALA', 'KOTLIN'] == ['Groovy', 'Java', 'scala', 'kotlin'].collect{it.toUpperCase()}
+assert ['GROOVY', 'JAVA', 'SCALA', 'KOTLIN'] == ['Groovy', 'Java', 'scala', 'kotlin']*.toUpperCase()
 
 //TASK concatenate all characters between 'a' and 'z'
-//assert 'abcdefghijklmnopqrstuvwxyz' == 
+//assert 'abcdefghijklmnopqrstuvwxyz' == ('a' .. 'z').inject('')
 
 //TASK assert that there are 26 characters between 'a' and 'z'
 //assert 26 == 
