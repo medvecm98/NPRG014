@@ -36,6 +36,16 @@ class HtmlMethods {
         self.append("\n${indent()}</p>\n")
         return ""
     }
+    public static String '*'(StringBuilder self, Closure code) {
+        code.delegate = self    
+        self.append("\n${indent()}<eh>\n")
+        indent++        
+        self.append(indent())        
+        self.append(code.call())
+        indent--        
+        self.append("\n${indent()}</eh>\n")
+        return ""
+    }
 }
 
 use(HtmlMethods) {
@@ -49,6 +59,7 @@ use(HtmlMethods) {
                 "some more content"
             }
             p {"This is a paragraph"}
+            '*' {"koholik"}
         }
     }
 println doc

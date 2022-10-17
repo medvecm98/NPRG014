@@ -18,6 +18,9 @@ def doc = new MyBuilder().html {
         div {
             "content"
         }
+        alko {
+            "holik"
+        }
     }
 }
 

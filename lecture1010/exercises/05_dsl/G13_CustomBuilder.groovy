@@ -16,8 +16,10 @@ class IndentBuilder extends BuilderSupport {
     }
 
     protected Object createNode(Object nodeName, Map attrs, Object value) {
+        println "Called FULL createNode ${nodeName.toString()}"
         final node = new Item(nodeName)
         if (value) node.value = value
+        println "End call FULL createNode ${nodeName.toString()}"
         return node
     }
 }
@@ -42,7 +44,7 @@ class Item {
 }
 
 final builder = new IndentBuilder()
-println(builder.html {
+/*println(builder.html {
     head {
         title 'Demo'
     }
@@ -53,6 +55,16 @@ println(builder.html {
         p(align: "Center", color: "Magenta") {
             text "This is my document"
         }
+    }
+})*/
+println(builder.html {
+    bruh {
+        title 'Moment'
+        p 'eh'
+    }
+    bruh2 {
+        title 'Moment2'
+        p 'eh2'
     }
 })
 
