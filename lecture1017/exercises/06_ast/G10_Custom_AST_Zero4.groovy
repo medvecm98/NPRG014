@@ -20,8 +20,6 @@ import static org.codehaus.groovy.control.CompilePhase.SEMANTIC_ANALYSIS
 @GroovyASTTransformationClass("ZeroTransformation4")
 public @interface Zero4 {}
 
-//TASK Complete the transformation code at the indicated position so that the test passes
-
 @GroovyASTTransformation(phase = SEMANTIC_ANALYSIS)
 public class ZeroTransformation4 implements ASTTransformation {
 
@@ -41,7 +39,7 @@ public class ZeroTransformation4 implements ASTTransformation {
             }
         }
         
-        annotatedClass.addMethod(res[0]) //a lot simpler
+        annotatedClass.addMethod(res[0]) //a lot simpler, see line 33
     }
 }
 

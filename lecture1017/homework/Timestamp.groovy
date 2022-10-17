@@ -58,6 +58,44 @@ public class CreatedAtTransformation implements ASTTransformation {
         
         //TODO Implement this method
         
+	    ClassNode c = astNodes[1]
+        String tsMethodName = astNodes[0].getMember('name').value
+
+        AstBuilder ab = new AstBuilder()
+	    final init1 = ab.buildFromString('System.currentTimeSeconds()')
+
+        /*ASTNode res = ab.buildFromSpec {
+            method(tsMethodName, Opcodes.ACC_PUBLIC, Long) {
+                parameters{}
+                exceptions{}
+                block{
+                    returnStatement{
+                        attributeExpression{}
+                    }
+                }
+            }
+        }[0]*/
+
+        List<ASTNode> res = ab.buildFromString('''
+            return ts;
+        ''')
+	
+	    c.addField('ts', Opcodes.ACC_PRIVATE, ClassHelper.long_TYPE, init1[0].statements[0].expression)
+
+	    final methods = c.getMethods()
+
+        methods.each { method ->
+            final tsUpdate = new AstBuilder().buildFromString('if ((System.currentTimeSeconds() - ts) > 0) ts = System.currentTimeSeconds()')[0]
+            final tsStmt   = tsUpdate.statements[0]
+
+            final newFnBody = new BlockStatement()
+            newFnBody.addStatement(method.getCode())
+            newFnBody.addStatement(tsStmt)
+
+            method.setCode(newFnBody)
+        }
+
+        c.addMethod(tsMethodName, Opcodes.ACC_PUBLIC, ClassHelper.Integer_TYPE, [] as Parameter[], [] as ClassNode[], res[0])
     }
 }
 
