@@ -23,6 +23,21 @@ class Plane {
         println "Changing altitude to $altitude"
         this.altitude = altitude
     }
+    
+    void performCommand(desc, Closure command) {
+        if (desc == 'Take off') {
+            command.delegate = this
+            command.call()
+        }
+        else if (desc == 'Land') {
+            command.delegate = this
+            command.call()
+        }
+    }
+    
+    void doCall(desc, Closure command) {
+        performCommand(desc, command)
+    }
 }
 
 final takeoff = {

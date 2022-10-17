@@ -19,7 +19,7 @@ final JFrame frame = new SwingBuilder().frame(title: 'Demo') {
             textArea(id: 'messages', columns: 50, rows: 20)
         }
         hbox {
-            ['Java', 'Groovy'].each {lang -> button(text: "Click $lang", actionPerformed: {messages.text += "Clicked $lang\n"})}
+            ['Java', 'Groovy', 'Scala'].each {lang -> button(text: "Click $lang", actionPerformed: {messages.text += "Clicked $lang\n"})}
         }
     }
 }

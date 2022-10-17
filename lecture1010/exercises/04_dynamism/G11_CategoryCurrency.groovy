@@ -14,7 +14,17 @@ class Money {
 
 class MoneyCategory {
 //TASK Define methods of the MoneyCategory class so that the code below passes
+    public static Money getEur(Integer amount) { // now its a property, not a method
+        new Money(amount: amount, currency: "EUR")
+    }
+    
+    public static Money getUsd(Integer amount) {
+        new Money(amount: amount, currency: "USD")
+    }
 }
+
+def m = new Money(amount: 10, currency: "CZK")
+println m
 
 use(MoneyCategory) {
     println 10.eur

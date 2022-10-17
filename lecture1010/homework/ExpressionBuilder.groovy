@@ -6,85 +6,16 @@
 // This means that parentheses must be placed where necessary with respect to the mathematical operator priorities.
 // Change or add to the code in the script. Reuse the infrastructure code at the bottom of the script.
 class NumericExpressionBuilder extends BuilderSupport {
+    
     @Override
     String toString() {
-        root.toString()
+//        ...
     }
-
-    protected Object checkRoot(Object toCheck) {
-        if (!root)
-            root = toCheck
-        return toCheck
-    }
-
-    protected void setParent(Object parent, Object child) {
-        parent.children << child
-    }
-
-    protected Object createNode(Object nodeName) {
-        createNode nodeName, null, null
-    }
-
-    protected Object createNode(Object nodeName, Object value) {
-        createNode nodeName, null, value
-    }
-
-    protected Object createNode(Object nodeName, Map attrs) {
-        createNode nodeName, attrs, null
-    }
-
-    protected Object createNode(Object nodeName, Map attrs, Object value) {
-        final node = new Item(name: nodeName)
-        if (attrs) {
-            node.attrs = attrs
-        }
-        return checkRoot(node)
-    }
-
-    Item root = null
 }
 
 class Item {
-    static Map priority = ['+' : 10, '-' : 10, '*' : 20, '/' : 20, 'power' : 30]
-    static Map symbols = ['+' : '+', '-' : '-', '*' : '*', '/' : '/', 'power' : '^']
-
-    String name
-    Map attrs
-    final List children = []
-
-    @Override
-    String toString() {
-        toStringPriority(Integer.MIN_VALUE)
-    }
-
-    String toStringPriority(int prevPriority) {
-        def expression = new StringBuilder()
-
-        if (priority[name] < prevPriority) {
-            expression << '('
-        }
-
-        if (children.size() > 0) {
-            expression << children[0].toStringPriority(priority[name]) << ' '
-            expression << symbols[name] << ' '
-            expression << children[1].toStringPriority(priority[name])
-        }
-        else {
-            return attrs['value']
-        }
-
-        if (priority[name] < prevPriority) {
-            expression << ')'
-        }
-
-        return expression.toString()
-    }
+//...
 }
-
-
-
-
-
 //------------------------- Do not modify beyond this point!
 
 def build(builder, String specification) {

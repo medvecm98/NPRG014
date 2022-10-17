@@ -1,4 +1,4 @@
-def o1 = order pizza to "Malostranske namesti"
+def o1 = order pasta to "Malostranske namesti" //order(pasta).to("Malostranske namesti")
 
 
 println o1
