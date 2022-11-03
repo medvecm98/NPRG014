@@ -9,7 +9,7 @@ import java.io.PrintStream
  * - class parameters, calling the superclass
  */
 
-class Logger(where: PrintStream):
+class Logger(val where: PrintStream):
 	def log(msg: String): Unit =
 		where.println(msg)
 
@@ -17,7 +17,9 @@ class Logger(where: PrintStream):
 /* ASSIGNMENT:
  * Change the AppLogger object to print: ">> " + msg
  */
-object AppLogger extends Logger(Console.out)
+object AppLogger extends Logger(Console.out):
+	override def log(msg: String): Unit =
+		where.println(">> " + msg)
 
 
 object LoggingExample:

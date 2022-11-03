@@ -29,6 +29,7 @@ class Rational(n: Int, d: Int):
 	def / (i: Int) = Rational(numer, denom * i)
 	def / (that: Rational) = Rational(numer * that.denom, denom * that.numer)
 	def unary_- = Rational(-numer, denom)
+	def unary_! = Rational(denom, numer)
 
 	// In future versions of Scala, methods with non-symbolic names will only be allowed as
 	// operators if they are declared with the infix modifier.
@@ -63,6 +64,7 @@ object RationalTest:
 		 * println(!c)
 		 */
 
+		println(!c)
 
 		/* ASSIGNMENT 3
 		 * Make is possible to prefix an integer number with R ~ to

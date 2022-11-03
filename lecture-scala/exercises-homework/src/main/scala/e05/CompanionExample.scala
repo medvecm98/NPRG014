@@ -28,6 +28,7 @@ class MyList[T] private(private val item: T, private val next: MyList[T]):
 
 object MyList:
   def apply[T](items: T*): MyList[T] =
+    println("calling the companion method")
     var result: MyList[T] = null
 
     for item <- items.reverse do
@@ -35,15 +36,19 @@ object MyList:
 
     result
 
+  def apply(lmao: Integer): Unit = 
+    println("7")
+
 
 object CompanionExample:
   def main(args: Array[String]): Unit =
-    val list = MyList(1, 2, 3, 4, 5)
+    val list = MyList.apply(1, 2, 3, 4, 5)
 
     println(list)
 
     /* ASSIGNMENT
-     * Extend the class MyList[T] so that the following line prints "1". You don't have to consider any other inputs than 0.
+     * Extend the class MyList[T] so that the following line prints "1". You don't have to 
+     * consider any other inputs than 0.
      *
      * println(list(0))
      */
