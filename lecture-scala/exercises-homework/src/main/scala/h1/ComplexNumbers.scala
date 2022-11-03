@@ -13,27 +13,26 @@ class Complex(val real: Int, val imaginary: Int):
 
 	def unary_- = new Complex(-real, -imaginary)
 
-	def + (r : Int) = Complex(real + r, imaginary)
 	def + (c : Complex) = Complex(real + c.real, imaginary + c.imaginary)
+	def * (c : Complex) = Complex(real * c.real - imaginary * c.imaginary, real * c.imaginary + imaginary * c.real)
+
+object Complex:
+	given Conversion[Int, Complex] = _i => new Complex(_i, 0)
 
 object ComplexOps:
 	object I:
-		def * (i: Int) = Complex(0, i)
-
-	extension (lhs: Int)
-		def * (dummy: I.type) = Complex(0, lhs)
-		def + (rhs: Complex) = Complex(lhs + rhs.real, rhs.imaginary)
+		def * (c: Complex) = Complex(0, 1) * c
 
 	extension (lhs: Complex)
-		def * (dummy: I.type) = Complex(-lhs.imaginary, lhs.real)
+		def * (dummy: I.type) = lhs * Complex(0, 1)
 
 object ComplexNumbers:
 	def main(args: Array[String]): Unit =
 		import ComplexOps.* //it needs to be imported...
+
 		println(Complex(1,2)) // 1+2i
-		/**/
+
 		println(1 + 2*I + I*3 + 2) // 3+5i
-		/**/
+
 		val c = (2+3*I + 1 + 4*I) * I
 		println(-c) // 7-3i
-		/**/

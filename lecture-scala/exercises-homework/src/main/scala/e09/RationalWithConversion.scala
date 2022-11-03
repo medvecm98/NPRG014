@@ -42,7 +42,7 @@ object RationalWithConversionTest:
 		/* ASSIGNMENT
 		 * Introduce necessary definitions in order to make the statement 
 		 * below possible. It should print out "3/2"
-		 * 
-		 * println(2/3 ~ R + 5/6 ~ R)
-		 */
+		 */ 
+		//println(2/3 ~ R + 5/6 ~ R)
+		 
 
