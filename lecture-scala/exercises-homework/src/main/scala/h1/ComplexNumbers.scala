@@ -28,6 +28,7 @@ object ComplexOps:
 
 object ComplexNumbers:
 	def main(args: Array[String]): Unit =
+		import Complex.given //it needs to be imported...
 		import ComplexOps.* //it needs to be imported...
 
 		println(Complex(1,2)) // 1+2i
