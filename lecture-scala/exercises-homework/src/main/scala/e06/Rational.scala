@@ -18,7 +18,7 @@ class Rational(n: Int, d: Int):
 	val numer = n / g
 	val denom = d / g
 
-	def this(n: Int) = this(n, 1)
+	def this(n: Int) = this(n, 1) //NOTE: constructor for use with numerator only
 
 	def + (that: Rational) = Rational(numer * that.denom + that.numer * denom, denom * that.denom)
 	def + (i: Int) = Rational(numer + i * denom, denom)
@@ -28,16 +28,22 @@ class Rational(n: Int, d: Int):
 	def * (i: Int) = Rational(numer * i, denom)
 	def / (i: Int) = Rational(numer, denom * i)
 	def / (that: Rational) = Rational(numer * that.denom, denom * that.numer)
+	def <-^ (i: Int) = Rational(i, denom)
+	//def ~ (i: Int) = Rational(i * numer, denom);
 	def unary_- = Rational(-numer, denom)
 	def unary_! = Rational(denom, numer)
 
 	// In future versions of Scala, methods with non-symbolic names will only be allowed as
 	// operators if they are declared with the infix modifier.
-	infix def withDenom(i: Int) = Rational(numer, denom)
+	infix def withDenom(i: Int) = Rational(numer, i)
 
 	override def toString = s"${numer}/${denom}"
 	private def gcd(a: Int, b: Int): Int = if b == 0 then a else gcd(b, a % b)
 
+//val R = Rational(1, 1)
+
+object R:
+	def ~ (i: Int) = Rational(i)
 
 object RationalTest:
 	def main(args: Array[String]): Unit =
@@ -56,6 +62,8 @@ object RationalTest:
 		 *
 		 * println(c <-^ 11)
 		 */
+		
+		println(c <-^ 11)
 
 		/* ASSIGNMENT 2
 		 * Implement a unary operator ! that inverts the rational
@@ -73,3 +81,5 @@ object RationalTest:
 		 *
 		 * println(R ~ 5/3)
 		 */
+
+		println(R ~ 5/3)

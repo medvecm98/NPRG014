@@ -22,6 +22,7 @@ class Rational(n: Int, d: Int):
 	def - (that: Rational) = Rational(numer * that.denom - that.numer * denom, denom * that.denom)
 	def * (that: Rational) = Rational(numer * that.numer, denom * that.denom)
 	def / (that: Rational) = Rational(numer * that.denom, denom * that.numer)
+	def ~ (dummy: R.type) = this
 	def unary_- = new Rational(-numer, denom)
 
 	override def toString = s"${numer}/${denom}"
@@ -30,7 +31,6 @@ class Rational(n: Int, d: Int):
 
 object Rational:
 	given Conversion[Int, Rational] = i => new Rational(i)
-
 
 object RationalWithConversionTest:
 	def main(args: Array[String]): Unit =
@@ -43,6 +43,6 @@ object RationalWithConversionTest:
 		 * Introduce necessary definitions in order to make the statement 
 		 * below possible. It should print out "3/2"
 		 */ 
-		//println(2/3 ~ R + 5/6 ~ R)
+		println(2/3 ~ R + 5/6 ~ R)
 		 
 

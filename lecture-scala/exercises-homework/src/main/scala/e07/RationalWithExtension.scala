@@ -34,6 +34,8 @@ object RationalOps:
 
 	extension (lhs: Int)
 		def ~ (dummy: R.type) = Rational(lhs)
+		def / (rhs: Rational) = Rational(lhs) / rhs
+		
 
 
 object RationalWithExtensionTest:
@@ -54,5 +56,5 @@ object RationalWithExtensionTest:
 		 * Introduce necessary definitions in order to make the statement
 		 * below possible. It should print out "1/2"
 		 *
-		 * println(1/2 ~ R)
 		 */
+		println(1/2 ~ R)
