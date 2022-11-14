@@ -15,6 +15,8 @@ abstract class Animal:
 
 	type SuitableFood <: Food
 	def eat(food: SuitableFood): Unit = {}
+	def eatsMoreThan(other: Animal {type SuitableFood = Grass}): String =
+		if other.amountOfFoodPerDay < amountOfFoodPerDay then "true" else "false"
 
 	def amountOfFoodPerDay: Double
 
@@ -57,9 +59,9 @@ object AbstractTypesTest:
 		/* ASSIGNMENT
 		Add a new method to class Animal such that the following statements work as described
 
-		println(bessy.eatsMoreThan(sissy))      -- prints "true"
-		// println(bessy.eatsMoreThan(shawn))   -- does not compile
 		*/
+		println(bessy.eatsMoreThan(sissy))
+		//println(bessy.eatsMoreThan(shawn))
 
 
 		Pasture.animals = bessy :: Pasture.animals

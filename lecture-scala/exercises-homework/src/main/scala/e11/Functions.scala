@@ -15,7 +15,7 @@ object Functions:
 					sort(xs.filter(pivot.<))
 			)
 
-		def sortf(xs: Array[Int], f: (Int, Int) => Int): Array[Int] =
+		/*def sortf(xs: Array[Int], f: (Int, Int) => Int): Array[Int] =
 			if (xs.length <= 1) then
 				xs
 			else
@@ -24,7 +24,7 @@ object Functions:
 						sortf(xs.filter(f(pivot, _) > 0, f)),
 						xs.filter(f(pivot, _) == 0),
 						sortf(xs.filter(f(pivot, _) < 0, f))
-				)
+				)*/
 
 	def concatArray[T](items: Array[T], fcn: T => String) =
 		val bld = new StringBuilder
@@ -61,6 +61,6 @@ object Functions:
 		 * 
 		 */
 
-		val yetOtherNumbers = sortf(Array(1,4,2,9,-1), _ - _)
-		println(concatArray(yetOtherNumbers, conc))
+		//val yetOtherNumbers = sortf(Array(1,4,2,9,-1), _ - _)
+		//println(concatArray(yetOtherNumbers, conc))
 

@@ -42,8 +42,15 @@ trait FourLegged extends HasLegs:
 		println("FourLegged.eat")
 		super.eat()
 
+trait XYZ extends Animal:
+	println("XYZ initialized")
+	
+	override def eat(): Unit =
+		println("XYZ.eat")
+		super.eat()
 
-class Cat extends Animal with Furry with FourLegged:
+
+class Cat extends Animal with Furry with XYZ with FourLegged:
 	println("Cat initialized")
 
 	override def eat(): Unit =
@@ -57,6 +64,8 @@ object Linearization:
 		val c = new Cat
 		
 		/* ASSIGNMENT
-		 * Add a new trait called XYZ and update the program such that the linearization sequence will be Cat.eat, FourLegged.eat, HasLegs.eat, XYZ.eat, Furry.eat, Animal.eat
+		 * Add a new trait called XYZ and update the program such 
+		 * that the linearization sequence will be Cat.eat, FourLegged.eat, 
+		 * HasLegs.eat, XYZ.eat, Furry.eat, Animal.eat
 		 */
 		c.eat()
