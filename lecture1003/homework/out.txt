@@ -1,0 +1,7 @@
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.codehaus.groovy.reflection.CachedClass (file:/usr/share/groovy/lib/groovy-2.4.21.jar) to method java.lang.Object.finalize()
+WARNING: Please consider reporting this to the maintainers of org.codehaus.groovy.reflection.CachedClass
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+numbers.findAll({it > 12 || it < 5}).findAll({it % 2 == 1}).collect({2 * it}).findAll({it % 5 != 0}).collect({it + LENGTH})[29, 33, 53, 61, 65, 69, 73, 81, 229, 1053, 2073]
+ok
