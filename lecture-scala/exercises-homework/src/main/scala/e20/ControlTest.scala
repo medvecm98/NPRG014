@@ -16,11 +16,16 @@ object ControlTest:
 		for i <- 1 to times do
 			op
 
+	def ifThenElse(cond: Boolean)(true_op: => Unit)(false_op: => Unit) : Unit =
+		if (cond)
+			true_op
+		else
+			false_op
 
 	def main(args: Array[String]): Unit =
 		withPrintWriter("out.txt") {
 			writer =>
-				doNTimes(5) {
+				doNTimes(5) { //(5) <- first parameter { <- beginning of second parameter (lambda in this case); () => is missing, that is not a problem in Scala
 					writer.println("Test")
 					writer.println("Test2")
 				}

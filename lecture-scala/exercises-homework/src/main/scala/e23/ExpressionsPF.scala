@@ -26,6 +26,16 @@ object ExpressionsPF:
 			case BinOp("*", Number(1), e) => e
 			case BinOp("*", e, Number(1)) => e			
 		}
+
+		val expr2 = Var("x")
+		val sExpr2 = expr2.simplifyUsing {
+			case BinOp("+", Number(0), e) => e
+			case BinOp("+", e, Number(0)) => e
+			case BinOp("*", Number(1), e) => e
+			case BinOp("*", e, Number(1)) => e			
+		}
 		
 		println(expr)
 		println(sExpr)
+		println(expr2)
+		println(sExpr2)
