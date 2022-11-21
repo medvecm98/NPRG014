@@ -1,0 +1,14 @@
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.codehaus.groovy.reflection.CachedClass (file:/usr/share/groovy/lib/groovy-2.4.21.jar) to method java.lang.Object.finalize()
+WARNING: Please consider reporting this to the maintainers of org.codehaus.groovy.reflection.CachedClass
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Caught: groovy.lang.MissingPropertyException: No such property: nullnumbers for class: Script1
+groovy.lang.MissingPropertyException: No such property: nullnumbers for class: Script1
+	at Script1.run(Script1.groovy:1)
+	at Scripting.processNumbers(Scripting.groovy:37)
+	at Scripting$processNumbers.callCurrent(Unknown Source)
+	at Scripting.run(Scripting.groovy:62)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
