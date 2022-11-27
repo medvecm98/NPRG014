@@ -33,9 +33,10 @@ class Monitor[T]:
       println("Property \"" + prop.name + "\" ... " + (if (result) "OK" else "FAILED"))
 
 
-  def require(func: PartialFunction[T, Boolean]): Boolean =
-    
-  /* Add body here
+  def require(func: PartialFunction[T, Boolean]): Boolean = func match 
+    case PartialFunction[Command, Boolean] => true
+    case _ => false
+  /* Add body here 
    *
    * to know whether a partial function is defined for a given event,
    * use func.isDefinedAt(event).
