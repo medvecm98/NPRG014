@@ -19,6 +19,9 @@ object StatisticsByTypeClass:
   def mean[T](xs: Array[T])(using ev: NumberLike[T]): T =
     xs.reduce(_ + _) / xs.size
 
+  def mean[T: NumberLike](xs: Vector[T]) : T = //*
+    xs.reduce(_ + _) / xs.size                 //*
+
   // Shorthand syntax - so call context bound (“a context parameter that depends on a type parameter”)
   def median[T: NumberLike](xs: Array[T]): T = xs(xs.size / 2)
 
@@ -39,6 +42,11 @@ object StatisticsByTypeClass:
     def plus(x: Int, y: Int) = x + y
     def minus(x: Int, y: Int) = x - y
     def divideByInt(x: Int, y: Int) = x / y
+
+  given NumberLike[Duration] with                                                   //*
+    def plus(x: Duration, y: Duration) = Duration(x.totalSeconds + y.totalSeconds)  //*
+    def minus(x: Duration, y: Duration) = Duration(x.totalSeconds - y.totalSeconds) //*
+    def divideByInt(x: Duration, y: Int) = Duration(x.totalSeconds / y)             //*
 
 
 class Duration(val totalSeconds: Double):
@@ -67,7 +75,7 @@ object StatisticsByTypeClassTest:
     /* ASSIGNMENT
        Add a new type class implementation for the Duration such that the code below executes as expected.
 
-    import StaticsByTypeClassDurationImplicits._
-    println(mean(Vector(Duration(1, 0), Duration(1, 30), Duration(2,0))))
      */
+    //import StaticsByTypeClassDurationImplicits._
+    println(mean(Vector(Duration(1, 0), Duration(1, 30), Duration(2,0))))
 
