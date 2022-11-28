@@ -4,9 +4,7 @@ package h3
 
 import scala.collection.mutable.ListBuffer
 
-abstract class Event:
-  def require(func: PartialFunction[Event, Boolean]) : Boolean =
-    if func.isDefinedAt(this) then func(this) else false
+abstract class Event
 
 case class Command(cmdName: String) extends Event
 
@@ -19,7 +17,7 @@ class Property(val name: String, val func: () => Boolean)
 class Monitor[T]:
   val properties = ListBuffer.empty[Property]
 
-  def property(propName: String)(formula: Boolean) : Unit =
+  def property(propName: String)(formula: => Boolean) : Unit =
     properties += Property(propName, () => formula)
 
   var eventsToBeProcessed = List[T]()
@@ -33,15 +31,13 @@ class Monitor[T]:
       println("Property \"" + prop.name + "\" ... " + (if (result) "OK" else "FAILED"))
 
 
-  def require(func: PartialFunction[T, Boolean]): Boolean = func match 
-    case PartialFunction[Command, Boolean] => true
-    case _ => false
-  /* Add body here 
-   *
-   * to know whether a partial function is defined for a given event,
-   * use func.isDefinedAt(event).
-   */
-
+  def require(func: PartialFunction[T, Boolean]): Boolean = 
+    for (event <- eventsToBeProcessed) do
+      eventsToBeProcessed = eventsToBeProcessed.tail
+      if func.isDefinedAt(event) then 
+        return func(event)
+    
+    return false
 
 class MyMonitor extends Monitor[Event] :
   property("The first command should succeed or fail before it is received again") {
@@ -82,6 +78,7 @@ class MyMonitor extends Monitor[Event] :
         }
     }
   }
+  
 
 
 object Checker:
