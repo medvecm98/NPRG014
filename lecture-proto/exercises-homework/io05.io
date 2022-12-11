@@ -13,7 +13,7 @@ testMethod(1, 2)
 
 
 Object debugPrintln := method(
-	"#{call message previous name} = #{asString} interpolate println"
+	"#{call message previous name} = #{asString}" interpolate println
 )
 
 x := 3
