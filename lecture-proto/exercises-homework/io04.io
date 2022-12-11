@@ -8,7 +8,7 @@ m next name println                               // println
 m next arguments println                          // list()
 m next next name println                          // ;
 m next next arguments println                     // list()
-m next next next name println                     // 
+m next next next name println                     //                          //empty, since these are the "()"
 m next next next arguments println                // list(x +(1))
 m next next next arguments first name println            // x
 m next next next arguments first arguments println       // list()
