@@ -11,8 +11,14 @@ testMethod(1, 2)
  * name of the variable).
  */
 
+
+Object debugPrintln := method(
+	"#{call message previous name} = #{asString} interpolate println"
+)
+
 x := 3
 y := 4
-// x debugPrintln    // "x = 3"
-// y debugPrintln    // "y = 4"
+
+x debugPrintln    // "x = 3"
+y debugPrintln    // "y = 4"
 
